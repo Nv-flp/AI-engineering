@@ -1,0 +1,319 @@
+<title>AI Engineering</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: bancada de laboratório — cabeçalho curto, mapa do fluxo, grade de agentes, trilha e estrutura. */
+:root {
+  --bg: #eef1ec;
+  --surface: #f9faf7;
+  --ink: #17231f;
+  --muted: #5a6862;
+  --line: #d3dad4;
+  --accent: #2f4bd8;
+  --c-mentor: #a8670f;
+  --c-prompts: #2f4bd8;
+  --c-rag: #0d7a6a;
+  --c-agentes: #6b46c1;
+  --c-evals: #b3304d;
+  --c-lab: #567a14;
+  --ok: #1f7a4a;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111916; --surface: #18221e; --ink: #e6ece8; --muted: #9aa9a2; --line: #2b3832;
+    --accent: #8ea2ff; --c-mentor: #e3a54a; --c-prompts: #8ea2ff; --c-rag: #4fc9b4;
+    --c-agentes: #b49cf2; --c-evals: #f07d95; --c-lab: #a7cf5c; --ok: #5fd08f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111916; --surface: #18221e; --ink: #e6ece8; --muted: #9aa9a2; --line: #2b3832;
+  --accent: #8ea2ff; --c-mentor: #e3a54a; --c-prompts: #8ea2ff; --c-rag: #4fc9b4;
+  --c-agentes: #b49cf2; --c-evals: #f07d95; --c-lab: #a7cf5c; --ok: #5fd08f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.55;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+}
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-block: 40px 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 56px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1; letter-spacing: -0.02em; font-weight: 700; }
+h2 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--f-mono); }
+
+/* Cabeçalho */
+header { display: grid; gap: 18px; }
+header .lead { max-width: 62ch; font-size: 1.08rem; color: var(--muted); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.stats b { color: var(--ink); font-size: 18px; font-variant-numeric: tabular-nums; margin-right: 6px; }
+.repo-link { font-family: var(--f-mono); font-size: 13px; }
+
+section { display: grid; gap: 20px; }
+.sec-head { display: grid; gap: 6px; }
+.sec-head p { color: var(--muted); max-width: 64ch; }
+
+/* Fluxo */
+.flow { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: grid; gap: 12px; justify-items: center; }
+.node { font-family: var(--f-mono); font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 6px; border: 1.5px solid currentColor; background: var(--surface); text-align: center; }
+.node small { display: block; font-weight: 400; color: var(--muted); font-size: 11px; }
+.flow-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; width: 100%; }
+.arrow { color: var(--muted); font-family: var(--f-mono); font-size: 13px; text-align: center; }
+.flow-note { font-size: 13px; color: var(--muted); text-align: center; max-width: 60ch; }
+
+/* Agentes */
+.agents { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.agent { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.agent-top { display: flex; align-items: center; gap: 12px; }
+.glyph { width: 40px; height: 40px; flex: none; border-radius: 8px; display: grid; place-items: center; font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--surface); background: var(--tone); }
+.agent-top div { min-width: 0; }
+.agent .folder { font-family: var(--f-mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.cmd { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--f-mono); font-size: 14px; font-weight: 600; color: var(--tone); border: 1px dashed var(--tone); border-radius: 6px; padding: 6px 6px 6px 12px; }
+.cmd button { font: inherit; font-size: 12px; font-weight: 400; border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: 4px 8px; border-radius: 4px; }
+.cmd button:hover { color: var(--ink); background: var(--bg); }
+.asks { display: grid; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.asks li { font-size: 13.5px; color: var(--muted); padding-left: 14px; position: relative; }
+.asks li::before { content: "›"; position: absolute; left: 0; color: var(--tone); font-weight: 700; }
+.open { font-family: var(--f-mono); font-size: 13px; font-weight: 600; color: var(--tone); text-decoration: none; justify-self: start; }
+.open:hover { text-decoration: underline; }
+
+/* Trilha */
+.track-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; }
+.overall { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.overall b { font-size: 22px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.track { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.stage-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.stage-head .who { font-family: var(--f-mono); font-size: 12px; color: var(--tone); }
+.bar { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--tone); width: 0; transition: width .3s ease; }
+.items { display: grid; gap: 4px; }
+.items label { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; cursor: pointer; padding: 4px 0; }
+.items input { accent-color: var(--tone); margin-top: 4px; flex: none; }
+.items input:checked + span { color: var(--muted); text-decoration: line-through; }
+.track-note { font-size: 13px; color: var(--muted); }
+
+/* Estrutura e uso */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px; min-width: 0; display: grid; gap: 12px; align-content: start; }
+.tree { font-family: var(--f-mono); font-size: 13px; line-height: 1.7; margin: 0; overflow-x: auto; white-space: pre; color: var(--ink); }
+.tree i { font-style: normal; color: var(--muted); }
+.steps { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+.steps code, .panel code { font-family: var(--f-mono); font-size: 13px; background: var(--bg); padding: 1px 6px; border-radius: 4px; }
+footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .agents, .track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  .agents, .track { grid-template-columns: minmax(0, 1fr); }
+  .flow-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wrap { gap: 44px; padding-block: 28px 56px; }
+}
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Nv-flp / ai-engineering</span>
+    <h1>AI Engineering</h1>
+    <p class="lead">Estudos e projetos de engenharia de IA com o Claude, divididos em seis agentes. Cada agente roda numa sessão própria do Claude Code e cuida de uma área do repositório.</p>
+    <div class="stats" id="stats"></div>
+    <a class="repo-link" href="https://github.com/Nv-flp/ai-engineering">github.com/Nv-flp/ai-engineering ↗</a>
+  </header>
+
+  <section aria-labelledby="t-flow">
+    <div class="sec-head">
+      <h2 id="t-flow">Como os agentes se conectam</h2>
+      <p>O Mentor decide o que estudar, os quatro módulos ensinam cada técnica e o Laboratório junta tudo num projeto real.</p>
+    </div>
+    <div class="flow">
+      <div class="node" style="color:var(--c-mentor)">Mentor-IA<small>planeja · acompanha</small></div>
+      <div class="arrow">↓ indica o próximo módulo</div>
+      <div class="flow-row">
+        <div class="node" style="color:var(--c-prompts)">Prompts<small>01</small></div>
+        <div class="node" style="color:var(--c-rag)">RAG<small>02</small></div>
+        <div class="node" style="color:var(--c-agentes)">Agentes<small>03</small></div>
+        <div class="node" style="color:var(--c-evals)">Evals<small>04 · mede os outros</small></div>
+      </div>
+      <div class="arrow">↓ técnicas aprendidas</div>
+      <div class="node" style="color:var(--c-lab)">Laboratório<small>projetos do portfólio</small></div>
+      <p class="flow-note">Todos escrevem no diário em <span class="mono">progresso/diario/</span> e marcam a trilha. É assim que o Mentor sabe onde você parou.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-agents">
+    <div class="sec-head">
+      <h2 id="t-agents">Os 6 agentes</h2>
+      <p>Abra a sessão do agente e digite o comando dele. Cada um só mexe na própria pasta.</p>
+    </div>
+    <div class="agents" id="agents"></div>
+  </section>
+
+  <section aria-labelledby="t-track">
+    <div class="track-top">
+      <div class="sec-head">
+        <h2 id="t-track">Trilha de estudos</h2>
+        <p>Os itens de <span class="mono">progresso/trilha.md</span>. Marque aqui para acompanhar no navegador.</p>
+      </div>
+      <div class="overall" id="overall"></div>
+    </div>
+    <div class="track" id="track"></div>
+    <p class="track-note">As marcações desta página ficam salvas só neste navegador. A trilha oficial é o arquivo do repositório, que os agentes atualizam ao concluir cada item.</p>
+  </section>
+
+  <section aria-labelledby="t-repo">
+    <div class="sec-head"><h2 id="t-repo">Repositório</h2></div>
+    <div class="two">
+      <div class="panel">
+        <h3>Estrutura</h3>
+<pre class="tree">ai-engineering/
+├─ CLAUDE.md          <i>regras de todos os agentes</i>
+├─ .claude/skills/    <i>os 6 agentes</i>
+│  ├─ mentor/  prompts/  rag/
+│  └─ agentes/ evals/    laboratorio/
+├─ comum/cliente.py   <i>cliente do Claude</i>
+├─ modulos/
+│  ├─ 01-prompts/     02-rag/
+│  └─ 03-agentes/     04-evals/
+├─ projetos/          <i>portfólio</i>
+├─ progresso/
+│  ├─ trilha.md
+│  └─ diario/
+└─ painel/index.html  <i>esta página</i></pre>
+      </div>
+      <div class="panel">
+        <h3>Como começar</h3>
+        <ol class="steps">
+          <li>No terminal: <code>pip install -r requirements.txt</code></li>
+          <li>Copie <code>.env.example</code> para <code>.env</code> e coloque sua <code>ANTHROPIC_API_KEY</code>.</li>
+          <li>Teste com <code>python modulos/01-prompts/exemplo.py</code></li>
+          <li>Abra a sessão <b>IA · Mentor</b> e digite <code>/mentor</code> para receber o primeiro passo.</li>
+          <li>Siga para o agente que o Mentor indicar.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>Modelo padrão dos exemplos: claude-opus-5-5 · SDK oficial anthropic (Python)</footer>
+</div>
+
+<script>
+const S = "https://claude.ai/code/";
+const AGENTS = [
+  { id: "mentor", name: "Mentor-IA", letter: "M", tone: "--c-mentor", folder: "progresso/", session: "session_01Qr8kauUrosVF5xrF2LHN13",
+    role: "Organiza a trilha, monta o plano da semana, lê o diário e diz qual é o próximo passo.",
+    asks: ["O que eu estudo agora?", "Planeja minha semana de estudos", "Como foi meu progresso?"] },
+  { id: "prompts", name: "Engenheiro-de-Prompts", letter: "P", tone: "--c-prompts", folder: "modulos/01-prompts/", session: "session_01Qr8kasMVVLo6The27iet6P",
+    role: "Ensina a escrever prompts: papel, contexto, exemplos, tags XML, saída em JSON e caching.",
+    asks: ["Próxima aula de prompts", "Melhora este prompt: ...", "Me dá um exercício de few-shot"] },
+  { id: "rag", name: "Arquiteto-RAG", letter: "R", tone: "--c-rag", folder: "modulos/02-rag/", session: "session_01Qr8kauJxFU9wLdZs4Ys5da",
+    role: "Constrói do zero uma IA que responde com base nos seus documentos, citando os trechos.",
+    asks: ["Explica embeddings com um exemplo", "Monta o chunking dos meus textos", "Faz a busca responder com citação"] },
+  { id: "agentes", name: "Construtor-de-Agentes", letter: "A", tone: "--c-agentes", folder: "modulos/03-agentes/", session: "session_01Qr8kar8uv3PnRFEqK1z5ev",
+    role: "Ensina tool use, loop de agente, ferramentas do servidor e MCP, um degrau por vez.",
+    asks: ["Cria um agente com 2 ferramentas", "Quando não usar agente?", "Conecta um servidor MCP"] },
+  { id: "evals", name: "Avaliador-Evals", letter: "E", tone: "--c-evals", folder: "modulos/04-evals/", session: "session_01Qr8kasCNZeBdCp9yesNLnz",
+    role: "Mede se um prompt, RAG ou agente melhorou de verdade, com casos de teste e notas.",
+    asks: ["Monta 10 casos de teste para o RAG", "Compara prompt v1 com v2", "Cria um LLM-como-juiz"] },
+  { id: "laboratorio", name: "Laboratório", letter: "L", tone: "--c-lab", folder: "projetos/", session: "session_01Qr8karo8p1PEuTQiT7W5MS",
+    role: "Junta o que foi aprendido em projetos completos e prontos para mostrar no portfólio.",
+    asks: ["Começa o projeto do chatbot", "Qual projeto faço primeiro?", "Escreve o README do projeto"] },
+];
+
+const TRACK = [
+  { t: "Fundamentos", who: "Mentor", tone: "--c-mentor", items: ["Configurar ambiente Python (.venv, requirements, .env)", "Primeira chamada à API do Claude", "Entender tokens, contexto, custo e latência"] },
+  { t: "Prompts", who: "/prompts", tone: "--c-prompts", items: ["Anatomia de um bom prompt", "System prompt vs. mensagem do usuário", "Exemplos (few-shot) e tags XML", "Saídas estruturadas (JSON validado)", "Prompt caching para reduzir custo"] },
+  { t: "RAG", who: "/rag", tone: "--c-rag", items: ["O que é RAG e quando usar", "Dividir documentos (chunking)", "Embeddings e similaridade de cosseno", "Busca + resposta com citações", "Medir a qualidade da busca"] },
+  { t: "Agentes", who: "/agentes", tone: "--c-agentes", items: ["Tool use: o Claude chamando funções", "Loop de agente (tool runner)", "Ferramentas do servidor (web search, code execution)", "MCP: conectar ferramentas externas", "Quando NÃO usar agente"] },
+  { t: "Avaliação", who: "/evals", tone: "--c-evals", items: ["Por que avaliar", "Montar um conjunto de testes", "Notas automáticas: código e LLM-como-juiz", "Comparar duas versões de prompt"] },
+  { t: "Projetos", who: "/laboratorio", tone: "--c-lab", items: ["Projeto 1: chatbot com memória", "Projeto 2: perguntas sobre meus PDFs (RAG)", "Projeto 3: agente que pesquisa e escreve relatório", "Publicar um projeto no portfólio"] },
+];
+
+const KEY = "ai-eng-trilha";
+let done = {};
+try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+
+const total = TRACK.reduce((n, s) => n + s.items.length, 0);
+document.getElementById("stats").innerHTML =
+  `<span><b>6</b>agentes</span><span><b>4</b>módulos</span><span><b>${total}</b>itens na trilha</span><span><b>3</b>projetos planejados</span>`;
+
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+document.getElementById("agents").innerHTML = AGENTS.map(a => `
+  <article class="agent" style="--tone:var(${a.tone})">
+    <div class="agent-top">
+      <span class="glyph" aria-hidden="true">${a.letter}</span>
+      <div><h3>${a.name}</h3><div class="folder">${a.folder}</div></div>
+    </div>
+    <div class="cmd"><span>/${a.id}</span><button type="button" data-copy="/${a.id}">Copiar</button></div>
+    <p>${a.role}</p>
+    <ul class="asks" aria-label="Exemplos de pedido">${a.asks.map(q => `<li>${esc(q)}</li>`).join("")}</ul>
+    <a class="open" href="${S + a.session}">Abrir sessão ↗</a>
+  </article>`).join("");
+
+document.getElementById("agents").addEventListener("click", e => {
+  const b = e.target.closest("button[data-copy]");
+  if (!b) return;
+  const txt = b.dataset.copy;
+  const ok = () => { b.textContent = "Copiado"; setTimeout(() => (b.textContent = "Copiar"), 1400); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(ok).catch(() => selectText(b.previousElementSibling));
+  } else selectText(b.previousElementSibling);
+});
+function selectText(el) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+const trackEl = document.getElementById("track");
+trackEl.innerHTML = TRACK.map((s, i) => `
+  <div class="stage" style="--tone:var(${s.tone})">
+    <div class="stage-head"><h3>${s.t}</h3><span class="who">${s.who}</span></div>
+    <div class="bar"><span id="bar-${i}"></span></div>
+    <div class="items">${s.items.map((it, j) => {
+      const id = `t-${i}-${j}`;
+      return `<label for="${id}"><input type="checkbox" id="${id}" ${done[id] ? "checked" : ""}><span>${esc(it)}</span></label>`;
+    }).join("")}</div>
+  </div>`).join("");
+
+function refresh() {
+  let all = 0;
+  TRACK.forEach((s, i) => {
+    const n = s.items.filter((_, j) => done[`t-${i}-${j}`]).length;
+    all += n;
+    document.getElementById(`bar-${i}`).style.width = (n / s.items.length * 100) + "%";
+  });
+  document.getElementById("overall").innerHTML = `<b>${Math.round(all / total * 100)}%</b> concluído · ${all} de ${total}`;
+}
+trackEl.addEventListener("change", e => {
+  if (e.target.type !== "checkbox") return;
+  if (e.target.checked) done[e.target.id] = true; else delete done[e.target.id];
+  save(); refresh();
+});
+refresh();
+</script>
