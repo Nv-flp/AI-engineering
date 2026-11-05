@@ -137,183 +137,37 @@ footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
   .wrap { gap: 44px; padding-block: 28px 56px; }
 }
 @media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+.empty { background: var(--surface); border: 1.5px dashed var(--line); border-radius: 10px; padding: 32px 24px; display: grid; gap: 10px; justify-items: start; }
+.empty p { color: var(--muted); max-width: 60ch; }
 </style>
 
 <div class="wrap">
   <header>
     <span class="eyebrow">Nv-flp / ai-engineering</span>
     <h1>AI Engineering</h1>
-    <p class="lead">Estudos e projetos de engenharia de IA com o Claude, divididos em seis agentes. Cada agente roda numa sessão própria do Claude Code e cuida de uma área do repositório.</p>
-    <div class="stats" id="stats"></div>
+    <p class="lead">Meus agentes de IA personalizados. Cada agente roda numa sessão própria do Claude Code e cuida de uma área do repositório.</p>
     <a class="repo-link" href="https://github.com/Nv-flp/ai-engineering">github.com/Nv-flp/ai-engineering ↗</a>
   </header>
 
-  <section aria-labelledby="t-flow">
-    <div class="sec-head">
-      <h2 id="t-flow">Como os agentes se conectam</h2>
-      <p>O Mentor decide o que estudar, os quatro módulos ensinam cada técnica e o Laboratório junta tudo num projeto real.</p>
-    </div>
-    <div class="flow">
-      <div class="node" style="color:var(--c-mentor)">Mentor-IA<small>planeja · acompanha</small></div>
-      <div class="arrow">↓ indica o próximo módulo</div>
-      <div class="flow-row">
-        <div class="node" style="color:var(--c-prompts)">Prompts<small>01</small></div>
-        <div class="node" style="color:var(--c-rag)">RAG<small>02</small></div>
-        <div class="node" style="color:var(--c-agentes)">Agentes<small>03</small></div>
-        <div class="node" style="color:var(--c-evals)">Evals<small>04 · mede os outros</small></div>
-      </div>
-      <div class="arrow">↓ técnicas aprendidas</div>
-      <div class="node" style="color:var(--c-lab)">Laboratório<small>projetos do portfólio</small></div>
-      <p class="flow-note">Todos escrevem no diário em <span class="mono">progresso/diario/</span> e marcam a trilha. É assim que o Mentor sabe onde você parou.</p>
-    </div>
-  </section>
-
   <section aria-labelledby="t-agents">
     <div class="sec-head">
-      <h2 id="t-agents">Os 6 agentes</h2>
-      <p>Abra a sessão do agente e digite o comando dele. Cada um só mexe na própria pasta.</p>
+      <h2 id="t-agents">Agentes</h2>
     </div>
-    <div class="agents" id="agents"></div>
-  </section>
-
-  <section aria-labelledby="t-track">
-    <div class="track-top">
-      <div class="sec-head">
-        <h2 id="t-track">Trilha de estudos</h2>
-        <p>Os itens de <span class="mono">progresso/trilha.md</span>. Marque aqui para acompanhar no navegador.</p>
-      </div>
-      <div class="overall" id="overall"></div>
+    <div class="empty">
+      <h3>Nenhum agente criado ainda</h3>
+      <p>Os agentes vão aparecer aqui conforme forem criados, com nome, comando, função, pasta de trabalho e link para a sessão de cada um.</p>
     </div>
-    <div class="track" id="track"></div>
-    <p class="track-note">As marcações desta página ficam salvas só neste navegador. A trilha oficial é o arquivo do repositório, que os agentes atualizam ao concluir cada item.</p>
   </section>
 
   <section aria-labelledby="t-repo">
     <div class="sec-head"><h2 id="t-repo">Repositório</h2></div>
-    <div class="two">
-      <div class="panel">
-        <h3>Estrutura</h3>
+    <div class="panel">
 <pre class="tree">ai-engineering/
 ├─ CLAUDE.md          <i>regras de todos os agentes</i>
-├─ .claude/skills/    <i>os 6 agentes</i>
-│  ├─ mentor/  prompts/  rag/
-│  └─ agentes/ evals/    laboratorio/
+├─ .claude/skills/    <i>um agente por pasta</i>
 ├─ comum/cliente.py   <i>cliente do Claude</i>
-├─ modulos/
-│  ├─ 01-prompts/     02-rag/
-│  └─ 03-agentes/     04-evals/
-├─ projetos/          <i>portfólio</i>
-├─ progresso/
-│  ├─ trilha.md
-│  └─ diario/
+├─ progresso/diario/  <i>registro de cada sessão</i>
 └─ painel/index.html  <i>esta página</i></pre>
-      </div>
-      <div class="panel">
-        <h3>Como começar</h3>
-        <ol class="steps">
-          <li>No terminal: <code>pip install -r requirements.txt</code></li>
-          <li>Copie <code>.env.example</code> para <code>.env</code> e coloque sua <code>ANTHROPIC_API_KEY</code>.</li>
-          <li>Teste com <code>python modulos/01-prompts/exemplo.py</code></li>
-          <li>Abra a sessão <b>IA · Mentor</b> e digite <code>/mentor</code> para receber o primeiro passo.</li>
-          <li>Siga para o agente que o Mentor indicar.</li>
-        </ol>
-      </div>
     </div>
   </section>
-
-  <footer>Modelo padrão dos exemplos: claude-opus-5-5 · SDK oficial anthropic (Python)</footer>
 </div>
-
-<script>
-const S = "https://claude.ai/code/";
-const AGENTS = [
-  { id: "mentor", name: "Mentor-IA", letter: "M", tone: "--c-mentor", folder: "progresso/", session: "session_01Qr8kauUrosVF5xrF2LHN13",
-    role: "Organiza a trilha, monta o plano da semana, lê o diário e diz qual é o próximo passo.",
-    asks: ["O que eu estudo agora?", "Planeja minha semana de estudos", "Como foi meu progresso?"] },
-  { id: "prompts", name: "Engenheiro-de-Prompts", letter: "P", tone: "--c-prompts", folder: "modulos/01-prompts/", session: "session_01Qr8kasMVVLo6The27iet6P",
-    role: "Ensina a escrever prompts: papel, contexto, exemplos, tags XML, saída em JSON e caching.",
-    asks: ["Próxima aula de prompts", "Melhora este prompt: ...", "Me dá um exercício de few-shot"] },
-  { id: "rag", name: "Arquiteto-RAG", letter: "R", tone: "--c-rag", folder: "modulos/02-rag/", session: "session_01Qr8kauJxFU9wLdZs4Ys5da",
-    role: "Constrói do zero uma IA que responde com base nos seus documentos, citando os trechos.",
-    asks: ["Explica embeddings com um exemplo", "Monta o chunking dos meus textos", "Faz a busca responder com citação"] },
-  { id: "agentes", name: "Construtor-de-Agentes", letter: "A", tone: "--c-agentes", folder: "modulos/03-agentes/", session: "session_01Qr8kar8uv3PnRFEqK1z5ev",
-    role: "Ensina tool use, loop de agente, ferramentas do servidor e MCP, um degrau por vez.",
-    asks: ["Cria um agente com 2 ferramentas", "Quando não usar agente?", "Conecta um servidor MCP"] },
-  { id: "evals", name: "Avaliador-Evals", letter: "E", tone: "--c-evals", folder: "modulos/04-evals/", session: "session_01Qr8kasCNZeBdCp9yesNLnz",
-    role: "Mede se um prompt, RAG ou agente melhorou de verdade, com casos de teste e notas.",
-    asks: ["Monta 10 casos de teste para o RAG", "Compara prompt v1 com v2", "Cria um LLM-como-juiz"] },
-  { id: "laboratorio", name: "Laboratório", letter: "L", tone: "--c-lab", folder: "projetos/", session: "session_01Qr8karo8p1PEuTQiT7W5MS",
-    role: "Junta o que foi aprendido em projetos completos e prontos para mostrar no portfólio.",
-    asks: ["Começa o projeto do chatbot", "Qual projeto faço primeiro?", "Escreve o README do projeto"] },
-];
-
-const TRACK = [
-  { t: "Fundamentos", who: "Mentor", tone: "--c-mentor", items: ["Configurar ambiente Python (.venv, requirements, .env)", "Primeira chamada à API do Claude", "Entender tokens, contexto, custo e latência"] },
-  { t: "Prompts", who: "/prompts", tone: "--c-prompts", items: ["Anatomia de um bom prompt", "System prompt vs. mensagem do usuário", "Exemplos (few-shot) e tags XML", "Saídas estruturadas (JSON validado)", "Prompt caching para reduzir custo"] },
-  { t: "RAG", who: "/rag", tone: "--c-rag", items: ["O que é RAG e quando usar", "Dividir documentos (chunking)", "Embeddings e similaridade de cosseno", "Busca + resposta com citações", "Medir a qualidade da busca"] },
-  { t: "Agentes", who: "/agentes", tone: "--c-agentes", items: ["Tool use: o Claude chamando funções", "Loop de agente (tool runner)", "Ferramentas do servidor (web search, code execution)", "MCP: conectar ferramentas externas", "Quando NÃO usar agente"] },
-  { t: "Avaliação", who: "/evals", tone: "--c-evals", items: ["Por que avaliar", "Montar um conjunto de testes", "Notas automáticas: código e LLM-como-juiz", "Comparar duas versões de prompt"] },
-  { t: "Projetos", who: "/laboratorio", tone: "--c-lab", items: ["Projeto 1: chatbot com memória", "Projeto 2: perguntas sobre meus PDFs (RAG)", "Projeto 3: agente que pesquisa e escreve relatório", "Publicar um projeto no portfólio"] },
-];
-
-const KEY = "ai-eng-trilha";
-let done = {};
-try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
-
-const total = TRACK.reduce((n, s) => n + s.items.length, 0);
-document.getElementById("stats").innerHTML =
-  `<span><b>6</b>agentes</span><span><b>4</b>módulos</span><span><b>${total}</b>itens na trilha</span><span><b>3</b>projetos planejados</span>`;
-
-const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-document.getElementById("agents").innerHTML = AGENTS.map(a => `
-  <article class="agent" style="--tone:var(${a.tone})">
-    <div class="agent-top">
-      <span class="glyph" aria-hidden="true">${a.letter}</span>
-      <div><h3>${a.name}</h3><div class="folder">${a.folder}</div></div>
-    </div>
-    <div class="cmd"><span>/${a.id}</span><button type="button" data-copy="/${a.id}">Copiar</button></div>
-    <p>${a.role}</p>
-    <ul class="asks" aria-label="Exemplos de pedido">${a.asks.map(q => `<li>${esc(q)}</li>`).join("")}</ul>
-    <a class="open" href="${S + a.session}">Abrir sessão ↗</a>
-  </article>`).join("");
-
-document.getElementById("agents").addEventListener("click", e => {
-  const b = e.target.closest("button[data-copy]");
-  if (!b) return;
-  const txt = b.dataset.copy;
-  const ok = () => { b.textContent = "Copiado"; setTimeout(() => (b.textContent = "Copiar"), 1400); };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(txt).then(ok).catch(() => selectText(b.previousElementSibling));
-  } else selectText(b.previousElementSibling);
-});
-function selectText(el) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-
-const trackEl = document.getElementById("track");
-trackEl.innerHTML = TRACK.map((s, i) => `
-  <div class="stage" style="--tone:var(${s.tone})">
-    <div class="stage-head"><h3>${s.t}</h3><span class="who">${s.who}</span></div>
-    <div class="bar"><span id="bar-${i}"></span></div>
-    <div class="items">${s.items.map((it, j) => {
-      const id = `t-${i}-${j}`;
-      return `<label for="${id}"><input type="checkbox" id="${id}" ${done[id] ? "checked" : ""}><span>${esc(it)}</span></label>`;
-    }).join("")}</div>
-  </div>`).join("");
-
-function refresh() {
-  let all = 0;
-  TRACK.forEach((s, i) => {
-    const n = s.items.filter((_, j) => done[`t-${i}-${j}`]).length;
-    all += n;
-    document.getElementById(`bar-${i}`).style.width = (n / s.items.length * 100) + "%";
-  });
-  document.getElementById("overall").innerHTML = `<b>${Math.round(all / total * 100)}%</b> concluído · ${all} de ${total}`;
-}
-trackEl.addEventListener("change", e => {
-  if (e.target.type !== "checkbox") return;
-  if (e.target.checked) done[e.target.id] = true; else delete done[e.target.id];
-  save(); refresh();
-});
-refresh();
-</script>
