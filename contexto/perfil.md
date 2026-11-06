@@ -18,12 +18,13 @@ _Última atualização: 06/11/2026_
 - Divulgação: **TikTok e Instagram**, conteúdo orgânico.
 - Formato dos vídeos: **ele não aparece**. Vídeos gerados ou montados com IA, imagens do produto,
   texto na tela e narração (voz gerada ou música). Sem rosto e sem voz própria.
-- Nicho: _a definir_. Sugestão em avaliação: **presentes e achadinhos**, aproveitando
-  Black Friday (fim de novembro) e Natal.
-- Produtos e ofertas atuais: _nenhum ainda — o agente `/dinheiro` ajuda a escolher_.
-- Público: _a definir junto com o nicho_.
-- Marca (nome, @, cores, tom de voz): _a preencher — o `/designer` cuida disso em `areas/designer/marca.md`_.
-- Números atuais (seguidores, vídeos publicados): _a preencher_.
+- Nicho: **presentes e achadinhos** (confirmado). Aproveitar a Black Friday (fim de novembro)
+  e o Natal para as primeiras vendas.
+- Produtos e ofertas atuais: _nenhum ainda — o agente `/dinheiro` escolhe os primeiros_.
+- Público: _a definir pelo `/dinheiro`_ (ponto de partida: quem procura presente barato e criativo).
+- Marca: **ainda não existe**. Nome, @, cores e tom de voz serão criados pelo `/designer`
+  em `areas/designer/marca.md`.
+- Números atuais (seguidores, vídeos publicados): _a confirmar_.
 
 ## Recursos
 - Investimento inicial disponível: **R$200 a R$300** (ex.: amostras de produtos, ferramentas de vídeo).
