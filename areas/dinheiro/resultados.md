@@ -12,9 +12,13 @@
 | Vídeo com mais visualizações | |
 
 ## Semana 1 — plano-2026-11-06.md (afiliado)
+Produto campeão nº 1: **removedor de bolinhas elétrico** (ver `produto-removedor-bolinhas.md`). Comissão por venda: R$ ___
+
 | Vídeo / ação | Produto | Visualizações | Cliques | Vendas | Comissão (R$) |
 |---|---|---|---|---|---|
-| | | | | | |
+| Roteiro 1 — Antes e depois | Removedor de bolinhas | | | | |
+| Roteiro 2 — Eu ia jogar fora | Removedor de bolinhas | | | | |
+| Roteiro 3 — Testei em 5 coisas | Removedor de bolinhas | | | | |
 
 **Conclusão (Dia 7):** _a preencher na revisão_
 - Dobrar:
