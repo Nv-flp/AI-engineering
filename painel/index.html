@@ -109,12 +109,29 @@ section { display: grid; gap: 20px; }
 .panel code { font-family: var(--f-mono); font-size: 13px; background: var(--bg); padding: 1px 6px; border-radius: 4px; }
 footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
 
+/* Perfil */
+.profile { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 16px; }
+.goal { background: var(--ink); color: var(--bg); border-radius: 10px; padding: 24px; display: grid; gap: 10px; align-content: start; }
+.goal .eyebrow { color: var(--bg); opacity: .7; }
+.goal-title { font-family: var(--f-display); font-size: 1.6rem; font-weight: 700; line-height: 1.1; text-wrap: balance; }
+.countdown { font-family: var(--f-mono); font-size: 13px; opacity: .85; }
+.countdown b { font-family: var(--f-display); font-size: 2.6rem; line-height: 1; display: block; font-variant-numeric: tabular-nums; opacity: 1; }
+.facts { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 20px; margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 24px; }
+.fact { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.fact dt { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.fact dd { margin: 0; font-weight: 500; }
+.todo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+.chip { font-family: var(--f-mono); font-size: 12px; border: 1px dashed var(--muted); border-radius: 999px; padding: 3px 10px; color: var(--ink); }
+.note { font-size: 13px; color: var(--muted); max-width: 70ch; }
+
 @media (max-width: 900px) {
   .agents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .two { grid-template-columns: minmax(0, 1fr); }
+  .profile { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 620px) {
   .agents { grid-template-columns: minmax(0, 1fr); }
+  .facts { grid-template-columns: minmax(0, 1fr); }
   .handoff { grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1fr); }
   .handoff .what { grid-column: 1 / -1; }
   .wrap { gap: 44px; padding-block: 28px 56px; }
@@ -129,6 +146,33 @@ footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
     <div class="stats"><span><b>9</b>agentes</span><span><b>3</b>grupos</span><span><b>9</b>sessões abertas</span></div>
     <a class="repo-link" href="https://github.com/Nv-flp/ai-engineering">github.com/Nv-flp/ai-engineering ↗</a>
   </header>
+
+  <section aria-labelledby="t-profile">
+    <div class="sec-head">
+      <h2 id="t-profile">Perfil do negócio</h2>
+      <p>O que todos os agentes leem antes de começar, em <span class="mono">contexto/perfil.md</span>.</p>
+    </div>
+    <div class="profile">
+      <div class="goal">
+        <span class="eyebrow">Meta dos 30 dias</span>
+        <div class="goal-title">Fazer as primeiras vendas</div>
+        <div class="countdown" id="countdown"><b>30</b>dias até 06/12/2026</div>
+        <div class="countdown">Passa pela Black Friday e entra no Natal</div>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Modelo</dt><dd>Afiliado de produtos físicos</dd></div>
+        <div class="fact"><dt>Nicho</dt><dd>Presentes e achadinhos</dd></div>
+        <div class="fact"><dt>Canais</dt><dd>TikTok e Instagram, orgânico</dd></div>
+        <div class="fact"><dt>Vídeos</dt><dd>Gerados com IA, sem aparecer</dd></div>
+        <div class="fact"><dt>Tempo</dt><dd>1 a 2 horas por dia</dd></div>
+        <div class="fact"><dt>Investimento</dt><dd>R$200 a R$300</dd></div>
+        <div class="fact"><dt>Fase</dt><dd>Ainda sem vendas</dd></div>
+        <div class="fact"><dt>Nível em IA</dt><dd>Iniciante</dd></div>
+      </dl>
+    </div>
+    <div class="todo"><span>Ainda falta:</span><span class="chip">marca e @ (/designer)</span><span class="chip">3 primeiros produtos (/dinheiro)</span><span class="chip">público (/dinheiro)</span><span class="chip">seguidores</span><span class="chip">ferramentas de vídeo (/conectores)</span></div>
+    <p class="note">Combinado: conteúdo realista feito com IA é identificado como gerado por IA, seguindo as regras de cada rede, e os vídeos mostram o produto como ele é.</p>
+  </section>
 
   <section aria-labelledby="t-agents">
     <div class="sec-head">
@@ -166,11 +210,11 @@ footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
       <div class="panel">
         <h3>Por onde começar</h3>
         <ol class="steps">
-          <li>Preencha <code>contexto/perfil.md</code> com o tempo que você tem, seus produtos e números. Quanto mais completo, melhores as respostas.</li>
-          <li>Abra a sessão <b>IA · Mentor</b> e pergunte o primeiro passo.</li>
-          <li>Abra <b>IA · Dinheiro</b> e responda as perguntas para receber o plano de 7 dias.</li>
-          <li>Abra <b>IA · Designer</b> para criar a sua marca. Ela vira a base de todas as artes.</li>
-          <li>Os outros agentes entram conforme o Mentor indicar.</li>
+          <li>Em cada sessão, comece com: <code>atualiza o repositório com git pull e lê o perfil</code>.</li>
+          <li><b>IA · Dinheiro</b>: escolher os 3 primeiros produtos e montar o plano de 7 dias.</li>
+          <li><b>IA · Designer</b>: criar a marca, o @ e o estilo dos vídeos.</li>
+          <li><b>IA · Conectores</b>: escolher as ferramentas de vídeo com IA.</li>
+          <li>Os outros agentes entram conforme o <b>IA · Mentor</b> indicar.</li>
         </ol>
       </div>
     </div>
@@ -181,6 +225,12 @@ footer { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
 
 <script>
 const S = "https://claude.ai/code/";
+(function () {
+  const fim = new Date(2026, 11, 6);
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  const dias = Math.max(0, Math.round((fim - hoje) / 86400000));
+  document.getElementById("countdown").innerHTML = `<b>${dias}</b>${dias === 1 ? "dia" : "dias"} até 06/12/2026`;
+})();
 const GROUPS = [
   { name: "Aprender e construir", tone: "--g-aprender", desc: "Estudar IA, construir com código e saber o que há de novo.", agents: [
     { cmd: "mentor", name: "Mentor de IA", letter: "Me", session: "session_01Qr8kavKSYMprMT81xiyKFA",
