@@ -25,6 +25,8 @@ Todos leem `contexto/perfil.md` antes de começar.
 
 ## Regras para todos os agentes
 
+0. **Antes de começar, rode `git pull origin main`** para pegar o perfil e os arquivos mais recentes
+   (outros agentes podem ter atualizado).
 1. Cada agente trabalha só na própria pasta e em `progresso/diario/`.
 2. Ao fim de cada sessão, registre o que foi feito em `progresso/diario/AAAA-MM-DD.md`.
 3. Código em Python usa o SDK oficial `anthropic` e o helper `comum/cliente.py`.
