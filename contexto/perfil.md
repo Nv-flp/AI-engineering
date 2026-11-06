@@ -3,20 +3,38 @@
 Todos os agentes leem este arquivo antes de começar. Mantenha-o atualizado:
 quando aprender algo novo sobre o Felipe ou o negócio, proponha a mudança aqui.
 
+_Última atualização: 06/11/2026_
+
 ## Sobre o Felipe
 - Nível em programação e IA: **iniciante**. Explique passo a passo, sem jargão (ou explicando o jargão).
 - Objetivo: usar IA para **fazer o negócio crescer** e, ao mesmo tempo, **aprender IA** de verdade.
-- Tempo disponível por dia: _a preencher_
+- Tempo disponível: **1 a 2 horas por dia**. Toda tarefa sugerida precisa caber nisso.
 - Ferramentas que já usa: Claude (claude.ai e Claude Code), GitHub, Gmail. _Completar._
 
 ## Sobre o negócio
-- Modelo: vendas online como afiliado / loja, com divulgação orgânica no **TikTok** e no **Instagram**.
-- Produtos e ofertas atuais: _a preencher_
-- Público: _a preencher_
-- Marca (nome, cores, tom de voz): _a preencher — o Designer cuida disso em `areas/designer/marca.md`_
-- Números atuais (vendas, seguidores, faturamento): _a preencher_
+- Fase: **ainda sem vendas**.
+- **Meta dos próximos 30 dias: fazer as primeiras vendas.**
+- Modelo escolhido: **afiliado de produtos físicos** (Shopee, Mercado Livre e plataformas parecidas).
+- Divulgação: **TikTok e Instagram**, conteúdo orgânico.
+- Formato dos vídeos: **ele não aparece**. Vídeos gerados ou montados com IA, imagens do produto,
+  texto na tela e narração (voz gerada ou música). Sem rosto e sem voz própria.
+- Nicho: _a definir_. Sugestão em avaliação: **presentes e achadinhos**, aproveitando
+  Black Friday (fim de novembro) e Natal.
+- Produtos e ofertas atuais: _nenhum ainda — o agente `/dinheiro` ajuda a escolher_.
+- Público: _a definir junto com o nicho_.
+- Marca (nome, @, cores, tom de voz): _a preencher — o `/designer` cuida disso em `areas/designer/marca.md`_.
+- Números atuais (seguidores, vídeos publicados): _a preencher_.
+
+## Recursos
+- Investimento inicial disponível: **R$200 a R$300** (ex.: amostras de produtos, ferramentas de vídeo).
 
 ## Preferências
 - Idioma: português do Brasil.
 - Respostas curtas, práticas, com o próximo passo claro.
 - Prioridade: o que dá resultado mais rápido com menos tempo investido.
+
+## Cuidados combinados
+- As plataformas pedem para identificar conteúdo realista gerado por IA. Seguir as regras
+  de cada rede e marcar o vídeo como gerado por IA quando for o caso.
+- Nos vídeos, mostrar o produto real como ele é (imagens do anúncio ou do produto comprado).
+  Nada de prometer o que o produto não entrega.
