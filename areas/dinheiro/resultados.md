@@ -13,6 +13,7 @@
 
 ## Semana 1 — plano-2026-11-06.md (afiliado)
 Produto campeão nº 1: **removedor de bolinhas elétrico** (ver `produto-removedor-bolinhas.md`). Comissão por venda: R$ ___
+Plataforma: **Shopee Afiliados** (poucos seguidores no TikTok; TikTok Shop fica para depois de ~1.000 seguidores). Tráfego pago só na semana 2, e só se um vídeo vender no orgânico.
 
 | Vídeo / ação | Produto | Visualizações | Cliques | Vendas | Comissão (R$) |
 |---|---|---|---|---|---|
