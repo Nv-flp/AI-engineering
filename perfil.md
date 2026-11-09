@@ -2,7 +2,7 @@
 
 _Última atualização: 09/11/2026_
 
-- **Objetivo:** ter um negócio próprio que faça ganhar mais do que o salário atual, com menos horas.
+- **Objetivo:** sair da CLT com um negócio próprio que pague mais que o salário, com menos horas.
   Com o tempo que sobrar, pensar em novas formas de ganhar dinheiro.
 - **Situação:** trabalha em tempo integral e faz faculdade de TI à noite. Ainda **não tem negócio próprio**.
 - **Tempo:** 1 a 2 horas por dia. **Dinheiro para começar:** até R$ 300.
