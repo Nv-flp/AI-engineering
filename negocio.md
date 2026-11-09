@@ -19,7 +19,9 @@ _a definir (ex.: primeiro cliente pagante em 30 dias)_
 | 0 | R$ 0 | 0 |
 
 ## Tarefas da semana
-- [ ] Escolher o negócio com o `/estrategista` (30 min)
+- [ ] Conversa com a liderança sobre sair do fiscal e ir para redes/servidores (hoje)
+- [ ] Escolher o negócio com o `/estrategista`, depois da conversa (30 min)
 
 ## Diário
 - 09/11/2026: repositório criado com 3 agentes (Estrategista, Executor, Automatizador).
+- 09/11/2026: Estrategista comparou opções. Opção A (automação para contabilidade) descartada: Felipe está cansado da área fiscal. Produtos físicos sem estoque guardados para depois. Escolha do negócio espera a conversa com a liderança (possível ida para redes/servidores).
